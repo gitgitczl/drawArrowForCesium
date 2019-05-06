@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>index</title>
+		<link rel="stylesheet" href="lib/Cesium1.53/Widgets/widgets.css" />
+		<style>
+			html,
+			body,
+			#map {
+				width: 100%;
+				height: 100%;
+			}
+
+			#toolBar {
+				position: absolute;
+				left: 20px;
+				top: 20px;
+				z-index: 2;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="map">
+		</div>
+		<div id="toolBar">
+			<button id="straightArrow">直线箭头</button>
+			<button id="attackArrow">攻击箭头</button>
+			<button id="pincerArrow">钳击箭头</button>
+			<button id="clear">删除</button>
+			<button id="save">保存</button>
+			<button id="show">展示</button>
+		</div>
+		
+	</body>
+
+	<script src="lib/Cesium1.53/Cesium.js"></script>
+	<script src="lib/jquery/jquery-2.1.4.min.js"></script>
+	<script src="lib/drawArrow/plotUtil.js"></script>
+	<script src="lib/drawArrow/algorithm.js"></script>
+	<script src="lib/drawArrow/arrowClass.js"></script>
+	<script src="lib/drawArrow/drawPlot.js"></script>
+	<script>
+		
+		Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI3NjRjNGFjNy1jNDM3LTQzMTktODVlYS05YmFmOTAxYjk5MWUiLCJpZCI6Mzk5MSwic2NvcGVzIjpbImFzbCIsImFzciIsImFzdyIsImdjIl0sImlhdCI6MTUzOTU3OTE2NX0.-25udUzENRJ66mnICMK8Hfc6xgF_VP7P4sWkSHaUjOQ';
+		var viewer = new Cesium.Viewer('map', {});
+		arrow.disable();
+		arrow.init(viewer);
+		$("#straightArrow").click(function(){
+			arrow.draw("straightArrow");
+		});
+		$("#attackArrow").click(function(){
+			arrow.draw("attackArrow"); 
+		});
+		$("#pincerArrow").click(function(){
+			arrow.draw("pincerArrow");
+		});
+		$("#clear").click(function(){
+			arrow.clearOne();
+		});
+		$("#save").click(function(){
+			arrow.saveData();
+		});
+		$("#show").click(function(){
+			$.getJSON("data/arrow.json",function(jsonData){
+				arrow.showData(jsonData);
+			});
+		});
+		
+		
+		
+	</script>
+</html>
