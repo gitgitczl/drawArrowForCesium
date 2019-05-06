@@ -1,5 +1,8 @@
 # drawArrowForCesium
-之前的态势标会插件（此插件地址：https://adventurexph.github.io/drawForCesium/）兼容不了cesium1.50之上，在修改态势标会箭头时会出错，导致没法修改；再后来某大神推出了兼容1.5x版本的插件（此插件地址：https://github.com/leation/DrawHelperForCesium1.5.X），但是该插件再绘制钳击箭头的时候有时会出现bug
+之前的态势标会插件（此插件地址：https://adventurexph.github.io/drawForCesium/）
+兼容不了cesium1.50之上，在修改态势标会箭头时会出错，导致没法修改；
+再后来某大神推出了兼容1.5x版本的插件（此插件地址：https://github.com/leation/DrawHelperForCesium1.5.X），
+但是该插件再绘制钳击箭头的时候有时会出现bug
 
 军事标绘箭头插件，兼容cesium1.5之上版本，无bug；
 
