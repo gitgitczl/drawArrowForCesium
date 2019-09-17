@@ -10,6 +10,5 @@
 原理：
 主要利用了plotUtil和algorithm这两个js来计算出面的坐标；
 
-注意：
-下载可通过火狐打开，用谷歌会报错，或者通过服务器打开；
-相关csdn地址：https://blog.csdn.net/caozl1132/article/details/89679716
+注意：通过web容器打开，例如iis发布、vscode live server启动、hbuilder启动。
+更多效果可关注本人csdn https://blog.csdn.net/caozl1132 或者 关注本人qq 951973194
