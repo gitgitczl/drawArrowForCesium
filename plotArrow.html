@@ -1,73 +1,97 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<title>index</title>
-		<link rel="stylesheet" href="lib/Cesium1.53/Widgets/widgets.css" />
-		<style>
-			html,
-			body,
-			#map {
-				width: 100%;
-				height: 100%;
-			}
 
-			#toolBar {
-				position: absolute;
-				left: 20px;
-				top: 20px;
-				z-index: 2;
-			}
-		</style>
-	</head>
-	<body>
-		<div id="map">
-		</div>
-		<div id="toolBar">
-			<button id="straightArrow">直线箭头</button>
-			<button id="attackArrow">攻击箭头</button>
-			<button id="pincerArrow">钳击箭头</button>
-			<button id="clear">删除</button>
-			<button id="save">保存</button>
-			<button id="show">展示</button>
-		</div>
-		
-	</body>
+<head>
+	<meta charset="utf-8" />
+	<title>index</title>
+	<link rel="stylesheet" href="lib/Cesium1.61/Widgets/widgets.css" />
+	<style>
+		html,
+		body,
+		#map {
+			width: 100%;
+			height: 100%;
+		}
 
-	<script src="lib/Cesium1.53/Cesium.js"></script>
-	<script src="lib/jquery/jquery-2.1.4.min.js"></script>
-	<script src="lib/drawArrow/plotUtil.js"></script>
-	<script src="lib/drawArrow/algorithm.js"></script>
-	<script src="lib/drawArrow/arrowClass.js"></script>
-	<script src="lib/drawArrow/drawPlot.js"></script>
-	<script>
-		
-		Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI3NjRjNGFjNy1jNDM3LTQzMTktODVlYS05YmFmOTAxYjk5MWUiLCJpZCI6Mzk5MSwic2NvcGVzIjpbImFzbCIsImFzciIsImFzdyIsImdjIl0sImlhdCI6MTUzOTU3OTE2NX0.-25udUzENRJ66mnICMK8Hfc6xgF_VP7P4sWkSHaUjOQ';
-		var viewer = new Cesium.Viewer('map', {});
-		arrow.disable();
-		arrow.init(viewer);
-		$("#straightArrow").click(function(){
-			arrow.draw("straightArrow");
+		#toolBar {
+			position: absolute;
+			left: 20px;
+			top: 20px;
+			z-index: 2;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="map">
+	</div>
+	<div id="toolBar">
+		<button id="straightArrow">直线箭头</button>
+		<button id="attackArrow">攻击箭头</button>
+		<button id="pincerArrow">钳击箭头</button>
+		<button id="clear">删除</button>
+		<button id="save">保存</button>
+		<button id="show">展示</button>
+
+	</div>
+
+</body>
+
+<script src="lib/Cesium1.61/Cesium.js"></script>
+<script src="lib/jquery/jquery-2.1.4.min.js"></script>
+<script src="lib/drawArrow/plotUtil.js"></script>
+<script src="lib/drawArrow/algorithm.js"></script>
+<script src="lib/drawArrow/arrowClass.js"></script>
+<script src="lib/drawArrow/drawPlot.js"></script>
+<script>
+	var viewer = new Cesium.Viewer('map', {
+		imageryProvider: new Cesium.ArcGisMapServerImageryProvider({
+			url: "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"
+		}),
+		terrainProvider: new Cesium.CesiumTerrainProvider({
+			url: "http://data.marsgis.cn/terrain"
+		})
+	});
+
+	var tileset = viewer.scene.primitives.add(
+		new Cesium.Cesium3DTileset({
+			url: "http://data.marsgis.cn/3dtiles/qx-dyt/tileset.json",
+			maximumScreenSpaceError: 1,
+		})
+	);
+	tileset.readyPromise.then(function (tileset) {
+		var boundingSphere = tileset.boundingSphere;
+		viewer.camera.flyToBoundingSphere(boundingSphere, new Cesium.HeadingPitchRange(0.0, -0.5, boundingSphere
+			.radius * 2));
+		var cartographic = Cesium.Cartographic.fromCartesian(boundingSphere.center);
+		var surface = Cesium.Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, 0.0);
+		var offset = Cesium.Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, 7);
+		var translation = Cesium.Cartesian3.subtract(offset, surface, new Cesium.Cartesian3());
+		tileset.modelMatrix = Cesium.Matrix4.fromTranslation(translation);
+	}).otherwise(function (error) {});
+
+	arrow.disable();
+	arrow.init(viewer);
+	$("#straightArrow").click(function () {
+		arrow.draw("straightArrow");
+	});
+	$("#attackArrow").click(function () {
+		arrow.draw("attackArrow");
+	});
+	$("#pincerArrow").click(function () {
+		arrow.draw("pincerArrow");
+	});
+	$("#clear").click(function () {
+		arrow.clearOne();
+	});
+	$("#save").click(function () {
+		arrow.saveData();
+	});
+	$("#show").click(function () {
+		$.getJSON("data/arrow.json", function (jsonData) {
+			arrow.showData(jsonData);
 		});
-		$("#attackArrow").click(function(){
-			arrow.draw("attackArrow"); 
-		});
-		$("#pincerArrow").click(function(){
-			arrow.draw("pincerArrow");
-		});
-		$("#clear").click(function(){
-			arrow.clearOne();
-		});
-		$("#save").click(function(){
-			arrow.saveData();
-		});
-		$("#show").click(function(){
-			$.getJSON("data/arrow.json",function(jsonData){
-				arrow.showData(jsonData);
-			});
-		});
-		
-		
-		
-	</script>
+	});
+</script>
+
 </html>
