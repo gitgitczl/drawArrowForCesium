@@ -15,6 +15,7 @@
 1、实现了更多种标绘的兼容
 2、实现类的统一管理
 3、更友好的绘制
-![Image text]（https://github.com/gitgitczl/drawArrowForCesium/blob/master/img/2.jpg）
+###
+![Image](https://github.com/gitgitczl/drawArrowForCesium/blob/master/img/2.jpg)
 更多效果可关注本人csdn https://blog.csdn.net/caozl1132 或者 关注本人qq 951973194
 
