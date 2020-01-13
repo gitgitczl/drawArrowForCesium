@@ -11,11 +11,11 @@
 主要利用了plotUtil和algorithm这两个js来计算出面的坐标；
 
 注意：通过web容器打开，例如iis发布、vscode live server启动、hbuilder启动。
-下面是本人新写的军标效果，相比较上个基于plotUtil和algorithm写的军标：
+下面是本人新写的军标效果（共有十种），相比较上个基于plotUtil和algorithm写的军标：
 1、实现了更多种标绘的兼容
 2、实现类的统一管理
 3、更友好的绘制
 ###
-![Image](https://github.com/gitgitczl/drawArrowForCesium/blob/master/img/2.jpg)
+![Image]（https://github.com/gitgitczl/drawArrowForCesium/blob/master/img/2.jpg）
 更多效果可关注本人csdn https://blog.csdn.net/caozl1132 或者 关注本人qq 951973194
 
