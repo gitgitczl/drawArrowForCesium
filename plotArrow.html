@@ -49,13 +49,14 @@
 			url: "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"
 		}),
 		terrainProvider: new Cesium.CesiumTerrainProvider({
-			url: "http://data.marsgis.cn/terrain"
+			url: "http://data.marsgis.cn/terrain",
 		})
 	});
 
 	var tileset = viewer.scene.primitives.add(
 		new Cesium.Cesium3DTileset({
-			url: "http://data.marsgis.cn/3dtiles/qx-dyt/tileset.json",
+			url: "http://yixun.tdtah.cn/MapCesium/ThreedFile/jianyu/jianyu_cesium.json",
+			//url: "http://data.marsgis.cn/3dtiles/qx-dyt/tileset.json",
 			maximumScreenSpaceError: 1,
 		})
 	);
